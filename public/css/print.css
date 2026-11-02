@@ -1,0 +1,25 @@
+body { font-family: Georgia, 'Times New Roman', serif; color: #111; background: #f2f2f2; margin: 0; }
+.toolbar { max-width: 210mm; margin: 1rem auto; display: flex; justify-content: space-between; font-family: system-ui, sans-serif; }
+.toolbar button { font: inherit; padding: 0.4rem 1rem; cursor: pointer; }
+.sheet { background: #fff; max-width: 210mm; margin: 0 auto 2rem; padding: 18mm; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08); }
+header { display: flex; justify-content: space-between; gap: 2rem; border-bottom: 2px solid #111; padding-bottom: 1rem; }
+header h1 { margin: 0 0 0.4rem; font-size: 1.5rem; }
+header h2 { margin: 0 0 0.5rem; letter-spacing: 0.2em; text-align: right; }
+header p { margin: 0; font-size: 0.9rem; line-height: 1.5; }
+.meta th { text-align: left; padding-right: 1rem; font-weight: normal; color: #555; }
+.bill-to h3 { margin: 1.5rem 0 0.3rem; font-size: 0.8rem; text-transform: uppercase; color: #555; letter-spacing: 0.1em; }
+.bill-to p { margin: 0; line-height: 1.5; }
+table.items { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+table.items th { border-bottom: 1px solid #111; text-align: left; padding: 0.4rem; font-size: 0.85rem; }
+table.items td { padding: 0.45rem 0.4rem; border-bottom: 1px solid #ddd; }
+.num { text-align: right; }
+table.summary { margin: 1rem 0 0 auto; border-collapse: collapse; min-width: 45%; }
+table.summary th { text-align: left; font-weight: normal; padding: 0.3rem 1rem 0.3rem 0; }
+table.summary td { text-align: right; padding: 0.3rem 0; }
+table.summary .grand th, table.summary .grand td { font-weight: bold; border-top: 1px solid #111; }
+footer { margin-top: 2.5rem; font-size: 0.9rem; color: #333; }
+@media print {
+  body { background: #fff; }
+  .no-print { display: none; }
+  .sheet { box-shadow: none; margin: 0; padding: 0; max-width: none; }
+}

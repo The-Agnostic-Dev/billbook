@@ -1,0 +1,8 @@
+services:
+  web:
+    build: .
+    ports:
+      - "5107:5107"
+    environment:
+      APP_URL: http://localhost:5107
+    restart: unless-stopped
