@@ -15,6 +15,9 @@ jobs:
     if: startsWith(github.head_ref, 'tad/') || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    env:
+      DB_CONNECTION: sqlite
+      DB_DATABASE: ${{ github.workspace }}/database/database.sqlite
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 2 }
@@ -27,6 +30,10 @@ jobs:
       - name: Install
         run: |
           composer install --no-interaction --prefer-dist
+          [ -f .env ] || cp .env.example .env 2>/dev/null || touch .env
+          grep -q '^APP_KEY=.\+' .env || php artisan key:generate --force
+          mkdir -p database && touch database/database.sqlite
+          sed -i -e 's/^DB_CONNECTION=.*/DB_CONNECTION=sqlite/' -e '/^DB_DATABASE=/d' .env && grep -q '^DB_CONNECTION=' .env || echo 'DB_CONNECTION=sqlite' >> .env
       - name: Build
         run: |
           find . -path ./vendor -prune -o -name '*.php' -print0 | xargs -0 -n1 php -l > /dev/null
