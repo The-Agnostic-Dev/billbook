@@ -70,7 +70,7 @@
             @if ($invoice->amount_paid > 0)
                 <tr><th>Amount paid</th><td>-{{ naira($invoice->amount_paid) }}</td></tr>
             @endif
-            <tr class="grand"><th>Balance due</th><td data-total="balance">{{ naira($invoice->total) }}</td></tr>
+            <tr class="grand"><th>Balance due</th><td data-total="balance">{{ naira($invoice->balance) }}</td></tr>
         </table>
 
         <footer>
