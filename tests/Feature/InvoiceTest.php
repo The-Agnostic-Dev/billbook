@@ -122,4 +122,15 @@ class InvoiceTest extends TestCase
             ->assertSee($invoice->number)
             ->assertSee('₦53,750.00');
     }
+
+    public function test_print_view_shows_amount_paid_and_reduced_balance(): void
+    {
+        $invoice = Invoice::factory()->sent()->withLines([['Consulting', 1, 50000]])->create();
+        $invoice->payments()->create(['amount' => 20000, 'paid_on' => today(), 'method' => 'transfer']);
+
+        $this->get(route('invoices.print', $invoice))
+            ->assertOk()
+            ->assertSee('₦20,000.00')
+            ->assertSee('₦33,750.00');
+    }
 }
