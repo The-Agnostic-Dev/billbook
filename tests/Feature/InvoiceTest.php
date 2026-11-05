@@ -112,6 +112,18 @@ class InvoiceTest extends TestCase
             ->assertDontSee('INV-ONTIME');
     }
 
+    public function test_print_view_shows_amount_paid_and_balance_due(): void
+    {
+        $invoice = Invoice::factory()->sent()->withLines([['Design work', 1, 100000]])->create();
+        $invoice->payments()->create(['amount' => 40000, 'paid_on' => today(), 'method' => 'transfer']);
+
+        $this->get(route('invoices.print', $invoice))
+            ->assertOk()
+            ->assertSee('₦107,500.00')
+            ->assertSee('₦40,000.00')
+            ->assertSee('₦67,500.00');
+    }
+
     public function test_print_view_shows_business_and_client_details(): void
     {
         $invoice = Invoice::factory()->sent()->withLines([['Consulting', 1, 50000]])->create();
